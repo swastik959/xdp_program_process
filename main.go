@@ -14,18 +14,7 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-//go:generate go run github.com/cilium/ebpf/cmd/bpf2go -target bpfel -cc clang -type info bpf ./tcp.bpf.c -- -I/usr/include/bpf -I.
-
 func main() {
-
-	//TODO:
-	// Take port number and comm as input instead of fixed "4040" and "myprocess"
-	//port := flag.Int64("port",4040,"port to be passed")
-	//flag.Parse()
-	//fmt.Println("pid that you have given: \n pid: %d port %d \n", *matchpid,*port)
-	//comm := flag.("comm","c","comm to be filtered")
-	//flag.Parse()
-	//fmt.Println("comm that you have given: \n comm: %d \n", *comm)
 
 	if err := rlimit.RemoveMemlock(); err != nil {
 		log.Fatal(err)

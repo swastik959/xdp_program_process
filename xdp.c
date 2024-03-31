@@ -56,7 +56,6 @@ int bind_intercept(struct pt_regs *ctx,  const struct sockaddr *addr) {
     struct sockaddr *address = (struct sockaddr *) PT_REGS_PARM2(ctx);
     struct sockaddr_in *in_addr = (struct sockaddr_in *) address;
     
-    // checking bind port address
     u16 x = READ_KERN(in_addr->sin_port);
     infostruct.lport= bpf_ntohs(x);
     infostruct.rport  = READ_KERN(sk->__sk_common.skc_num);
@@ -75,7 +74,6 @@ int xdp_prog(struct xdp_md *skb) {
     s = bpf_map_lookup_elem(&eventmap,&key);
     if (!s) return 0;
     
-    //checking if the process comm is the one we want
     bool commcheck =  s->comm[0]=='m' && s->comm[1]=='y' && s->comm[2]=='p' && s->comm[3]=='r' && s->comm[4]=='o' && s->comm[5]=='c' && s->comm[6]=='e' && s->comm[7]=='s' && s->comm[8]=='s';
     
     void *data = (void *)(long)skb->data;
