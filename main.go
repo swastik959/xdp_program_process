@@ -52,7 +52,7 @@ func main() {
 	const key uint32 = 0
 	for range ticker.C {
 		if err := objs.Eventmap.Lookup(key, &event); err != nil {
-			log.Println("reading map: %v", err)
+			log.Printf("reading map: %v", err)
 			continue
 		}
 		fmt.Printf("\x1bc")
